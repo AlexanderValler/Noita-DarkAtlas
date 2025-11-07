@@ -1,6 +1,5 @@
 <Entity tags="wand">
-    <Base file="data/entities/base_wand_physics.xml">
-    <!--<Base file="data/entities/base_item.xml" > enable to turn off kicking wand-->
+    <Base file="data/entities/base_item.xml" >
         <ItemComponent
             item_name="atlas_wand_1"
             remove_on_death="1"
@@ -9,8 +8,8 @@
         </ItemComponent>
     </Base>
 
-    <!-- <Base file="data/entities/base_wand.xml"> </Base>  play animation when wand is picked up-->
-    <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base> <!--dont play anim-->
+    <Base file="data/entities/base_wand.xml"> </Base>  <!--play animation when wand is picked up-->
+    <!-- <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base> dont play anim-->
 
 	<AbilityComponent
         _enabled="1"
@@ -27,7 +26,7 @@
         <gun_config 
             actions_per_round="1"
             shuffle_deck_when_empty="0"
-            reload_time="30"
+            reload_time="10"
             deck_capacity="20" >
         </gun_config>
         <gunaction_config 

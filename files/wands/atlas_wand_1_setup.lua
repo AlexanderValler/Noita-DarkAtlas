@@ -63,6 +63,7 @@ AddGunActionPermanent(entity_id, "ENERGY_SHIELD")
 
 AddGunAction( entity_id, "RECOIL_DAMPER" )
 
+-- add ball spell to slot 1 and 2
 for i=1,2 do
 	AddGunAction( entity_id, "RUBBER_BALL" )
 end
