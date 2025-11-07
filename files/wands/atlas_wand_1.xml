@@ -1,48 +1,29 @@
-<!--
-
- -->
-
 <Entity tags="wand">
-        
-    <!-- 
-    <Base file="data/entities/base_wand_physics.xml">               -> The wand is subject to gravity (can be kicked)
-    <Base file="data/entities/base_item.xml"                        -> The wand is NOT subject to gravity (CANNOT be kicked)
-     -->
-    
-    <!-- <Base file="data/entities/base_wand_physics.xml"> -->
-    <Base file="data/entities/base_item.xml" >
+    <Base file="data/entities/base_wand_physics.xml">
+    <!--<Base file="data/entities/base_item.xml" > enable to turn off kicking wand-->
         <ItemComponent
-            item_name="wand_template_1"
+            item_name="atlas_wand_1"
             remove_on_death="1"
             collect_nondefault_actions="1"
-            play_hover_animation="1" >
+            play_hover_animation="1" > <!--0 the wand turns around itself, 1 the wand floats in the air-->
         </ItemComponent>
     </Base>
-    <!-- play_hover_animation="0" -> the wand turns around itself
-         play_hover_animation="1" -> the wand floats in the air
-     -->
 
-    <!-- <Base file="data/entities/base_wand.xml"> </Base>  -->
-    <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base>
-
-    <!-- 
-    <Base file="data/entities/base_wand.xml"> </Base>                -> play animation when wand is picked up.
-    <Base file="data/entities/base_wand_pickup.xml" > [...] </Base>  -> DON'T play animation when wand is picked up.
-     -->
+    <!-- <Base file="data/entities/base_wand.xml"> </Base>  play animation when wand is picked up-->
+    <Base file="data/entities/base_wand_pickup.xml" > <LuaComponent _enabled="0" script_item_picked_up="" /> </Base> <!--dont play anim-->
 
 	<AbilityComponent
         _enabled="1"
-        sprite_file="mods/NoitaWandTemplate/files/wands/simple_wand_gfx.xml"
+        sprite_file="mods/DarkAtlas/files/wands/atlas_wand_1_gfx.xml"
         swim_propel_amount="0"
-        ui_name=""
+        ui_name="Atlas wand"
         drop_as_item_on_death="1"
         cooldown_frames="0"
         entity_count="1"
         reload_time_frames="0"
         mana_charge_speed="600"
         mana_max="50"
-        use_gun_script="1"
-        >
+        use_gun_script="1">
         <gun_config 
             actions_per_round="1"
             shuffle_deck_when_empty="0"
@@ -54,8 +35,8 @@
             fire_rate_wait="30" >
         </gunaction_config>
     </AbilityComponent>
-    <!-- add_these_child_actions="BURST_2,COLOUR_RAINBOW" -->
-	
+
+	<!-- adjust hotspot to change where spells are fired from  -->
 	<HotspotComponent 
         _tags="shoot_pos"
         offset.x="12"
@@ -66,7 +47,7 @@
         _enabled="1"
         execute_on_added="1"
         remove_after_executed="1"
-        script_source_file="mods/NoitaWandTemplate/files/wands/simple_wand_setup.lua"
+        script_source_file="mods/DarkAtlas/files/wands/atlas_wand_1_setup.lua"
         >
     </LuaComponent>
 
@@ -74,6 +55,7 @@
         _tags="enabled_in_world,enabled_in_hand,enabled_in_inventory" >
     </ManaReloaderComponent>
 
+    <!-- Adds pfx to the wand, Noita provides many options in the data/particles/ directory -->
     <SpriteParticleEmitterComponent
 		sprite_file="data/particles/ray.xml" 
 		delay="0"

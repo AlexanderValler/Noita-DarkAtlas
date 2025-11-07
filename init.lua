@@ -35,11 +35,11 @@ end
 ]]--
 
 -- init.lua
--- This script initializes the NoitaWandTemplate mod
+-- This script initializes the DarkAtlas mod
 
 function OnPlayerSpawned( player_entity ) -- this runs when player entity has been created
 	-- Path to the wand XML file
-    local wand_path = "mods/NoitaWandTemplate/files/wands/simple_wand.xml"
+    local wand_path = "mods/DarkAtlas/files/wands/atlas_wand_1.xml"
 
     local x, y = EntityGetTransform(player_entity)
 	SetRandomSeed( x, y + GameGetFrameNum() )

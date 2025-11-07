@@ -1,0 +1,31 @@
+
+<Sprite filename="mods/DarkAtlas/files/wands/atlas_wand_1.png" >
+	
+  <!-- handgun -->
+  <RectAnimation 
+	name="default" 
+	pos_x="0" 
+	pos_y="0" 
+	offset_x="3" 
+	offset_y="4" 
+	has_offset="1"
+	frame_count="1" 
+	frame_width="14" 
+	frame_height="8" 
+	frame_wait="0.2" 
+	frames_per_row="10" 
+	loop="0"  >
+  </RectAnimation>
+  
+  <!--
+  The frame_width and frame_height attributes define the size of each frame in your sprite sheet. 
+  In the example above, each frame is 14x8 pixels. This should match the actual dimensions of your 
+  wand image in the PNG file.
+
+  The offset_x and offset_y attributes determine the position of the sprite relative to the entity's 
+  center point. In the example, x=3 & y=4 for most wands in the game.
+
+
+  -->
+  
+</Sprite>

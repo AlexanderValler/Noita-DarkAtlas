@@ -26,7 +26,7 @@ local x, y = EntityGetTransform( entity_id )
 local ability_comp = EntityGetFirstComponent( entity_id, "AbilityComponent" )
 
 local wand = { }
-wand.name = {"Template wand"}
+wand.name = {"Atlas wand"}
 wand.deck_capacity = { 3, 5 }
 wand.actions_per_round = 2
 wand.reload_time = {20,30}
@@ -55,10 +55,11 @@ ComponentObjectSetValue2( ability_comp, "gunaction_config", "speed_multiplier", 
 ComponentSetValue2( ability_comp, "mana_max", mana_max )
 ComponentSetValue2( ability_comp, "mana", mana_max )
 
-local colours = { "COLOUR_RAINBOW", "COLOUR_RED", "COLOUR_PURPLE", "COLOUR_ORANGE", "COLOUR_BLUE", "COLOUR_YELLOW", "COLOUR_GREEN" }
+local colours = { "COLOUR_RAINBOW", "COLOUR_RED", "COLOUR_PURPLE", "COLOUR_BLUE", "COLOUR_YELLOW", "COLOUR_GREEN" }
 
 -- Add permanently a color
 AddGunActionPermanent( entity_id, get_random_from( colours ) )
+AddGunActionPermanent(entity_id, "ENERGY_SHIELD")
 
 AddGunAction( entity_id, "RECOIL_DAMPER" )
 
