@@ -1,0 +1,23 @@
+<Entity name="arm_r">
+
+    <SpriteComponent 
+      _tags="with_item" 
+      alpha="1" 
+      image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_arm.xml" 
+      next_rect_animation="" 
+      rect_animation="default" 
+      z_index="0.59" >
+    </SpriteComponent>
+
+    <InheritTransformComponent
+      parent_hotspot_tag="right_arm_root"
+      only_position="1" >
+    </InheritTransformComponent>  
+
+    <HotspotComponent
+      _tags="hand"
+      sprite_hotspot_name="hand"
+      transform_with_scale="1" >
+    </HotspotComponent>
+
+  </Entity>
