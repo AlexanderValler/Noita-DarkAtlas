@@ -52,14 +52,6 @@ mod_settings =
 		value_default = true,
 		scope = MOD_SETTING_SCOPE_NEW_GAME,
 	},
-	{
-		id = "SHROOM_TOGGLE",
-		ui_name = "Custom Fungal Transformation Type",
-		ui_description = "This changes the way the transformation looks.",
-		value_default = "1",
-		values = { {"0","No Visual Changes"}, {"1","Shroom Head"}, {"2","Recolor Only"} },
-		scope = MOD_SETTING_SCOPE_NEW_GAME,
-	},
 }
 
 -- This function is called to ensure the correct setting values are visible to the game via ModSettingGet(). your mod's settings don't work if you don't have a function like this defined in settings.lua.

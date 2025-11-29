@@ -1,38 +1,7 @@
 function OnPlayerSpawned( player_entity ) -- This runs when player entity has been created
 	-- random loadout compatibility fix
-	if tonumber(StatsGetValue("playtime")) < 1 then	
-		if ModSettingGet("DarkAtlas.HAT_TOGGLE") == true then	
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "SpriteComponent" ), "image_file", "mods/DarkAtlas/files/skin/enemies_gfx/player.xml" )
-			
-			EntityAddComponent( player_entity, "SpriteComponent",
-			{
-				_tags="character, DarkAtlas_Main",
-				alpha="0", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player.xml", 
-				next_rect_animation="", 
-				offset_x="6", 
-				offset_y="14" ,
-				rect_animation="walk",
-				update_transform="1",                                               
-				z_index="0.60005"
-			} )
-		elseif ModSettingGet("DarkAtlas.HAT_TOGGLE") == false then
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "SpriteComponent" ), "image_file", "mods/DarkAtlas/files/skin/enemies_gfx/player_shroom.xml" )
-			
-			EntityAddComponent( player_entity, "SpriteComponent",
-			{
-				_tags="character, DarkAtlas_Main2, copy_no_hat_fix",
-				alpha="0", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_no_hat2.xml", 
-				next_rect_animation="", 
-				offset_x="6", 
-				offset_y="14" ,
-				rect_animation="walk",
-				update_transform="1",                                               
-				z_index="0.60005"
-			} )
-		end	
-			
+	if tonumber(StatsGetValue("playtime")) < 1 then
+		
 		local plyrChildEnt = EntityGetAllChildren( player_entity )
 		if ( plyrChildEnt ~= nil ) then
 			for i,chldEntity in ipairs( plyrChildEnt ) do
@@ -48,38 +17,18 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 		
 		EntityAddComponent( player_entity, "SpriteComponent",
 		{
-			_tags="character, DarkAtlas_Hat",
+			_tags="character, DarkAtlas_Model",
 			alpha="1", 
-			image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_head.xml", 
+			image_file="mods/DarkAtlas/files/skin/enemies_gfx/player.xml", 
 			next_rect_animation="", 
 			offset_x="6", 
 			offset_y="14" ,
 			rect_animation="walk",
 			update_transform="1",                                               
 			z_index="0.602"
-		} )
-		-- EntityAddComponent( player_entity, "SpriteComponent",
-		-- {
-		-- 	_tags="character, DarkAtlas_Hat",
-		-- 	alpha="0", 
-		-- 	image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_head2.xml", 
-		-- 	next_rect_animation="", 
-		-- 	offset_x="6", 
-		-- 	offset_y="14" ,
-		-- 	rect_animation="walk",
-		-- 	update_transform="1",                                               
-		-- 	z_index="0.602"
-		-- } )		
+		} )	
 		
-		if ModSettingGet("DarkAtlas.HAT_TOGGLE") == false and ModSettingGet("DarkAtlas.CAPE_TOGGLE") == false then
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames.txt" )
-		elseif ModSettingGet("DarkAtlas.HAT_TOGGLE") == true and ModSettingGet("DarkAtlas.CAPE_TOGGLE") == false then
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames_hat.txt" )
-		elseif ModSettingGet("DarkAtlas.HAT_TOGGLE") == false and ModSettingGet("DarkAtlas.CAPE_TOGGLE") == true then
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames_cape.txt" )
-		elseif ModSettingGet("DarkAtlas.HAT_TOGGLE") == true and ModSettingGet("DarkAtlas.CAPE_TOGGLE") == true then
-			ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames_hat_and_cape.txt" )
-		end
+		ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames.txt" )
 
 		-- Removes cape
 		local plyChildEnt = EntityGetAllChildren( player_entity )
@@ -96,14 +45,6 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 			-- Adds cape entities
 			local px, py = EntityGetTransform( player_entity )
 			local ent_cape = EntityLoad("mods/DarkAtlas/skin/entities/atlas_cape/atlas_cape.xml",px, py)    
-			EntityAddChild(player_entity, ent_cape )	
-			
-			local px, py = EntityGetTransform( player_entity )
-			local ent_cape = EntityLoad("mods/DarkAtlas/skin/entities/atlas_cape/atlas_cape2.xml",px, py)    
-			EntityAddChild(player_entity, ent_cape )
-			
-			local px, py = EntityGetTransform( player_entity )
-			local ent_cape = EntityLoad("mods/DarkAtlas/skin/entities/atlas_cape/atlas_cape3.xml",px, py)    
 			EntityAddChild(player_entity, ent_cape )
 			
 			EntityAddComponent( player_entity, "SpriteComponent",
@@ -131,7 +72,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 		end
 			
 
-		if ModSettingGet("DarkAtlas.JETPACK_TOGGLE") == true then
+		--if ModSettingGet("DarkAtlas.JETPACK_TOGGLE") == true then
 			EntitySetComponentsWithTagEnabled( player_entity, "jetpack", 1 )
 			if( nil == EntityGetFirstComponent( player_entity, "ParticleEmitterComponent", "DarkAtlas_pt" ) ) then
 				-- Remove old particles
@@ -213,7 +154,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 				ComponentSetValueVector2( ptEmit2, "area_circle_radius", amn, amx )
 				-- Create new particles end
 			end
-		end
+		--end
 		
 		EntityAddComponent( player_entity, "LuaComponent",
 		{

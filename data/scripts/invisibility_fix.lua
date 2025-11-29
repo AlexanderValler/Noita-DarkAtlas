@@ -7,9 +7,6 @@ local is_invisible = ComponentGetValue2( invis_effect, "mInvisible")
 local copy_hat_sprite = EntityGetFirstComponent(player, "SpriteComponent", "copy_hat_fix")
 local copy_no_hat_sprite = EntityGetFirstComponent(player, "SpriteComponent", "copy_no_hat_fix")
 
-local hat1_sprite = EntityGetFirstComponent(player, "SpriteComponent", "hat_fix1")
-local hat2_sprite = EntityGetFirstComponent(player, "SpriteComponent", "hat_fix2")
-
 local cape_top1_sprite = EntityGetFirstComponent(player, "SpriteComponent", "cape_top_fix1")
 local cape_top2_sprite = EntityGetFirstComponent(player, "SpriteComponent", "cape_top_fix2")
 
@@ -26,20 +23,6 @@ elseif ModSettingGet("DarkAtlas.HAT_TOGGLE") == false then
 		ComponentSetValue(copy_no_hat_sprite,"alpha", 0)
 	end
 end
-
-if is_invisible == nil then
-	ComponentSetValue2(hat1_sprite,"alpha", 1)
-	ComponentSetValue2(hat2_sprite,"alpha", 0)
-elseif is_invisible ~= nil then
-	if is_invisible == "0" then
-		ComponentSetValue2(hat1_sprite,"alpha", 0)
-		ComponentSetValue2(hat2_sprite,"alpha", 1)
-	elseif is_invisible == "1" then
-		ComponentSetValue2(hat1_sprite,"alpha", 0)
-		ComponentSetValue2(hat2_sprite,"alpha", 0.9)
-	end
-end
-
 
 if ModSettingGet("DarkAtlas.CAPE_TOGGLE") == true then
 	if is_invisible == nil then
