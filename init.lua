@@ -1,7 +1,7 @@
 function OnPlayerSpawned( player_entity ) -- This runs when player entity has been created
 	-- random loadout compatibility fix
 	if tonumber(StatsGetValue("playtime")) < 1 then
-		
+		ComponentSetValue2( EntityGetFirstComponent( player_entity, "SpriteComponent" ), "image_file", "mods/DarkAtlas/files/skin/enemies_gfx/atlas_player.xml" )
 		local plyrChildEnt = EntityGetAllChildren( player_entity )
 		if ( plyrChildEnt ~= nil ) then
 			for i,chldEntity in ipairs( plyrChildEnt ) do
@@ -14,19 +14,6 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 				end
 			end
 		end
-		
-		EntityAddComponent( player_entity, "SpriteComponent",
-		{
-			_tags="character, DarkAtlas_Model",
-			alpha="1", 
-			image_file="mods/DarkAtlas/files/skin/enemies_gfx/player.xml", 
-			next_rect_animation="", 
-			offset_x="6", 
-			offset_y="14" ,
-			rect_animation="walk",
-			update_transform="1",                                               
-			z_index="0.602"
-		} )	
 		
 		ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames.txt" )
 
@@ -51,7 +38,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 			{
 				_tags="character, DarkAtlas_Cape_Top, cape_top_fix1",
 				alpha="1", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape_top.xml", 
+				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
 				next_rect_animation="", 
 				offset_x="6", 
 				offset_y="14" ,
@@ -62,7 +49,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 			{
 				_tags="character, DarkAtlas_Cape_Top, cape_top_fix2",
 				alpha="0", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape_top.xml", 
+				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
 				next_rect_animation="", 
 				offset_x="6", 
 				offset_y="14" ,
@@ -70,9 +57,23 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 				z_index="0.598"
 			} )
 		end
+
+		if ModSettingGet("megumin_e.PERK_MODE_TOGGLE") == true then
+			local inventory = EntityGetWithName("inventory_quick")
+			if inventory ~= nil then
+				local items = EntityGetAllChildren( inventory )
+				if items ~= nil then
+					local item = items[7]
+					if EntityGetComponent(item, "ManaReloaderComponent") ~= nil then
+						GameKillInventoryItem( player_entity, item )
+					end
+					EntityAddChild( inventory, EntityLoad( "data/entities/items/starting_manatite_weak.xml" ) )
+				end
+			end
+		end
 			
 
-		--if ModSettingGet("DarkAtlas.JETPACK_TOGGLE") == true then
+		if ModSettingGet("DarkAtlas.JETPACK_TOGGLE") == true then
 			EntitySetComponentsWithTagEnabled( player_entity, "jetpack", 1 )
 			if( nil == EntityGetFirstComponent( player_entity, "ParticleEmitterComponent", "DarkAtlas_pt" ) ) then
 				-- Remove old particles
@@ -116,7 +117,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 				local ptEmit2 = EntityAddComponent( player_entity, "ParticleEmitterComponent",
 				{
 					_tags="jetpack,DarkAtlas_pt",
-					emitted_material_name="plasma_fading_pink",
+					emitted_material_name="smoke_magic",
 					x_pos_offset_min="-5",
 					x_pos_offset_max="5",
 					y_pos_offset_min="-5",
@@ -154,7 +155,7 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 				ComponentSetValueVector2( ptEmit2, "area_circle_radius", amn, amx )
 				-- Create new particles end
 			end
-		--end
+		end
 		
 		EntityAddComponent( player_entity, "LuaComponent",
 		{
@@ -186,3 +187,10 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 		local wand = EntityLoad(wand_path, x, y)
 	end
 end
+
+-- append files adjustments to add wands to spawn pools
+ModLuaFileAppend("data/scripts/biomes/dragoncave.lua", "mods/DarkAtlas/files/wands/addstaff.lua")
+ModLuaFileAppend("data/scripts/biomes/magic_gate.lua", "mods/DarkAtlas/files/wands/addstaff.lua")
+ModLuaFileAppend("data/scripts/biomes/rainforest.lua", "mods/DarkAtlas/files/wands/addstaff.lua")
+ModLuaFileAppend("data/scripts/biomes/sandcave.lua", "mods/DarkAtlas/files/wands/addstaff.lua")
+ModLuaFileAppend("data/scripts/biomes/the_end.lua", "mods/DarkAtlas/files/wands/addstaff.lua")

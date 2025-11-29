@@ -1,5 +1,5 @@
 <Sprite 
-  filename="mods/DarkAtlas/files/skin/enemies_gfx/player.png" 
+  filename="mods/DarkAtlas/files/skin/enemies_gfx/atlas_player.png" 
   hotspots_filename="mods/DarkAtlas/files/skin/enemies_gfx/player_hotspots.png" 
   offset_x="6" 
   offset_y="14" 

@@ -32,13 +32,6 @@ mod_settings_version = 1 -- This is a magic global that can be used to migrate s
 mod_settings = 
 {
 	{
-		id = "CROWN_TOGGLE",
-		ui_name = "Toggle Crown",
-		ui_description = "Toggle special crown on or off.",
-		value_default = true,
-		scope = MOD_SETTING_SCOPE_NEW_GAME,
-	},
-	{
 		id = "CAPE_TOGGLE",
 		ui_name = "Toggle Cape",
 		ui_description = "Toggle special cape on or off.",
