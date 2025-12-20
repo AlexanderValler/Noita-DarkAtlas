@@ -17,45 +17,47 @@ function OnPlayerSpawned( player_entity ) -- This runs when player entity has be
 		
 		ComponentSetValue2( EntityGetFirstComponent( player_entity, "DamageModelComponent" ), "ragdoll_filenames_file", "mods/DarkAtlas/files/skin/ragdolls/player/filenames.txt" )
 
-		-- Removes cape
-		local plyChildEnt = EntityGetAllChildren( player_entity )
-		if ( plyChildEnt ~= nil ) then
-			for i,childEntity in ipairs( plyChildEnt ) do
-				if ( EntityGetName( childEntity ) == "cape" ) then
-					EntityKill( childEntity )
-					break
-				end
-			end
-		end
 
 		if ModSettingGet("DarkAtlas.CAPE_TOGGLE") == true then	
 			-- Adds cape entities
 			local px, py = EntityGetTransform( player_entity )
 			local ent_cape = EntityLoad("mods/DarkAtlas/skin/entities/atlas_cape/atlas_cape.xml",px, py)    
 			EntityAddChild(player_entity, ent_cape )
+
 			
-			EntityAddComponent( player_entity, "SpriteComponent",
-			{
-				_tags="character, DarkAtlas_Cape_Top, cape_top_fix1",
-				alpha="1", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
-				next_rect_animation="", 
-				offset_x="6", 
-				offset_y="14" ,
-				rect_animation="walk",
-				z_index="0.598"
-			} )
-			EntityAddComponent( player_entity, "SpriteComponent",
-			{
-				_tags="character, DarkAtlas_Cape_Top, cape_top_fix2",
-				alpha="0", 
-				image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
-				next_rect_animation="", 
-				offset_x="6", 
-				offset_y="14" ,
-				rect_animation="walk",
-				z_index="0.598"
-			} )
+			--EntityAddComponent( player_entity, "SpriteComponent",
+			--{
+				--_tags="character, DarkAtlas_Cape_Top, cape_top_fix1",
+				--alpha="1", 
+				--image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
+				--next_rect_animation="", 
+				--offset_x="6", 
+				--offset_y="14" ,
+				--rect_animation="walk",
+				--z_index="0.598"
+			--} )
+			--EntityAddComponent( player_entity, "SpriteComponent",
+			--{
+				--_tags="character, DarkAtlas_Cape_Top, cape_top_fix2",
+				--alpha="0", 
+				--image_file="mods/DarkAtlas/files/skin/enemies_gfx/player_cape.xml", 
+				--next_rect_animation="", 
+				--offset_x="6", 
+				--offset_y="14" ,
+				--rect_animation="walk",
+				--z_index="0.598"
+			--} )
+		else
+			-- Removes cape
+			local plyChildEnt = EntityGetAllChildren( player_entity )
+			if ( plyChildEnt ~= nil ) then
+				for i,childEntity in ipairs( plyChildEnt ) do
+					if ( EntityGetName( childEntity ) == "cape" ) then
+						EntityKill( childEntity )
+						break
+					end
+				end
+			end	
 		end
 
 		if ModSettingGet("megumin_e.PERK_MODE_TOGGLE") == true then

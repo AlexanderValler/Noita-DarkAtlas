@@ -1,4 +1,4 @@
-<Entity name="cape1">
+<!--<Entity name="cape1">
    
     <VerletPhysicsComponent
 	cloth_color="573C43"
@@ -21,4 +21,32 @@
         parent_hotspot_tag="cape_root" >
     </InheritTransformComponent>  
   
+</Entity>
+-->
+
+<Entity NAME="cape1">
+	
+	<InheritTransformComponent
+        parent_hotspot_tag="cape" >
+    </InheritTransformComponent>
+   
+    <VerletPhysicsComponent
+    	stiffness="1.0"
+    	num_points="5"
+		velocity_dampening="0.8"
+    	resting_distance="3.0"
+		scale_sprite_x="0"
+		pixelate_sprite_transforms="0"
+		simulate_gravity="1"
+		mass_min="0.1"
+		mass_max="0.9"
+		animation_amount="4"
+		animation_energy="0.4"
+		>
+    </VerletPhysicsComponent>
+
+	<Base file="mods/DarkAtlas/files/skin/entities/atlas_cape/atlas_cape_1.xml" />
+	<Base file="mods/DarkAtlas/files/skin/entities/atlas_cape/atlas_cape_2.xml" />
+	<Base file="mods/DarkAtlas/files/skin/entities/atlas_cape/atlas_cape_3.xml" />
+	<Base file="mods/DarkAtlas/files/skin/entities/atlas_cape/atlas_cape_4.xml" />
 </Entity>
